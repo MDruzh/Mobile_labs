@@ -6,4 +6,5 @@
     <string name="phonePattern">[+]380[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]</string>
     <string name="passwordPattern">.{8,}</string>
     <string name="emailPattern">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
+    <string name="connectionError">Internet connection is lost!</string>
 </resources>
