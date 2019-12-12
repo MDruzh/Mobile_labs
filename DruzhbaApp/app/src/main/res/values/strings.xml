@@ -7,4 +7,21 @@
     <string name="passwordPattern">.{8,}</string>
     <string name="emailPattern">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
     <string name="connectionError">Internet connection is lost!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="current_name">Username: </string>
+    <string name="current_email">Email: </string>
+    <string name="update">Update</string>
+    <string name="logout">Logout</string>
+    <string name="enter_new_email">Enter new email: </string>
+    <string name="enter_new_username">Enter new username: </string>
+    <string name="tab2">Tab #2</string>
+    <string name="somethingWentWrong">Something went wrong</string>
+    <string name="image_uploaded">Image uploaded</string>
+    <string name="username_updated">Username is updated</string>
+    <string name="email_updated">Email is updated</string>
+    <string name="enter_username">Please enter username</string>
+    <string name="invalidEmail">Invalid Email</string>
 </resources>

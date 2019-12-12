@@ -1,32 +1,36 @@
 package com.example.android.druzhbaapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import androidx.cardview.widget.CardView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.PlaneViewHolder> {
     private List<Plane> planes;
+    private Context context;
 
-    public RvAdapter(List<Plane> planes) {
+    public RvAdapter(Context context, List<Plane> planes) {
+        this.context = context;
         this.planes = planes;
     }
 
+    @NonNull
     @Override
-    public PlaneViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.activity_list_of_items, viewGroup, false);
-        PlaneViewHolder planeViewHolder = new PlaneViewHolder(v);
-        return planeViewHolder;
+    public RvAdapter.PlaneViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
+
+        final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_list_of_items, parent, false);
+        return new PlaneViewHolder(itemView);
     }
 
     @Override
@@ -36,6 +40,23 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.PlaneViewHolder> {
         planeViewHolder.company.setText(planes.get(i).getCompany());
         planeViewHolder.speed.setText(planes.get(i).getSpeed());
         planeViewHolder.route.setText(planes.get(i).getRoute());
+        planeViewHolder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openItemDetails(i);
+            }
+        });
+    }
+
+    private void openItemDetails(int position) {
+        Intent intent = new Intent(context, DataContainer.class);
+        intent.putExtra("company", planes.get(position).getCompany());
+        intent.putExtra("model", planes.get(position).getModel());
+        intent.putExtra("route", planes.get(position).getRoute());
+        intent.putExtra("speed", planes.get(position).getSpeed());
+        intent.putExtra("image", planes.get(position).getPoster());
+
+        context.startActivity(intent);
     }
 
     @Override
@@ -44,23 +65,23 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.PlaneViewHolder> {
     }
 
     public static class PlaneViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
         private ImageView avatar;
         private TextView model;
         private TextView company;
         private TextView speed;
         private TextView route;
-        private SwipeRefreshLayout refreshLayout;
+        //private SwipeRefreshLayout refreshLayout;
+        private LinearLayout layout;
 
         PlaneViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView) itemView.findViewById(R.id.cv);
-            refreshLayout = (SwipeRefreshLayout) itemView.findViewById(R.id.swipe);
+            //refreshLayout = (SwipeRefreshLayout) itemView.findViewById(R.id.swipe);
             avatar = (ImageView) itemView.findViewById(R.id.avatar);
-            model = (TextView) itemView.findViewById(R.id.model);
-            company = (TextView) itemView.findViewById(R.id.company);
-            speed = (TextView) itemView.findViewById(R.id.speed);
-            route = (TextView) itemView.findViewById(R.id.route);
+            model = (TextView) itemView.findViewById(R.id.plane_model);
+            company = (TextView) itemView.findViewById(R.id.plane_company);
+            speed = (TextView) itemView.findViewById(R.id.plane_speed);
+            route = (TextView) itemView.findViewById(R.id.plane_route);
+            layout = itemView.findViewById(R.id.main_layout);
         }
     }
 
